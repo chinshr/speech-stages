@@ -1,6 +1,6 @@
 # Speech::Stages
 
-TODO: Write a gem description
+Application specific common helper library to sync chunk processing stages.
 
 ## Installation
 
@@ -16,9 +16,6 @@ Or install it yourself as:
 
     $ gem install speech-stages
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 
