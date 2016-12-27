@@ -41,7 +41,11 @@ module Speech
       end # class
 
       def set(values)
-        new_keys  = ([values].flatten.map(&:to_sym) & PROCESSED_STAGES.keys)
+        if values.is_a?(self.class)
+          new_keys = values.to_a
+        else
+          new_keys = ([values].flatten.map(&:to_sym) & PROCESSED_STAGES.keys)
+        end
         self.bits = new_keys.sum {|d| self.class.bit_of(d)}
         if @target.respond_to?(:processed_stages_mask=)
           @target.send(:processed_stages_mask=, self.bits)

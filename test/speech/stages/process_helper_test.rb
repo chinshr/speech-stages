@@ -147,4 +147,12 @@ class Speech::Stages::ProcessHelperTest < Test::Unit::TestCase
     @entity.status = Speech::State::STATUS_PROCESSING_ERROR
     assert_equal true, @entity.processing_error?
   end
+
+  def test_set_from_other_instance
+    @entity.processed_stages = [:build, :encode]
+    other_entity = ChunksterWithoutStatus.new
+    other_entity.processed_stages = @entity.processed_stages
+    assert_equal [:build, :encode], other_entity.processed_stages.to_a
+  end
+
 end
