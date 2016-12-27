@@ -2,7 +2,7 @@ require 'test_helper.rb'
 
 class Speech::Stages::ProcessHelperTest < Test::Unit::TestCase
 
-  class Chunkster
+  class ChunksterWithStatus
     include Speech::Stages::ProcessHelper
 
     attr_accessor :status
@@ -13,7 +13,7 @@ class Speech::Stages::ProcessHelperTest < Test::Unit::TestCase
   end
 
   def setup
-    @entity = Chunkster.new
+    @entity = ChunksterWithStatus.new
   end
 
   def test_should_get_processed_stages
