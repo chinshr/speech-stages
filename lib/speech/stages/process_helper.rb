@@ -50,17 +50,17 @@ module Speech
 
         def processing?
           raise NotImplementedError, "status not present" unless respond_to?(:status)
-          status == Speech::STATUS_PROCESSING
+          status == Speech::State::STATUS_PROCESSING
         end
 
         def processed?
           raise NotImplementedError, "status not present" unless respond_to?(:status)
-          status == Speech::STATUS_PROCESSED
+          status == Speech::State::STATUS_PROCESSED
         end
 
         def processing_error?
           raise NotImplementedError, "status not present" unless respond_to?(:status)
-          status == Speech::STATUS_PROCESSING_ERROR
+          status == Speech::State::STATUS_PROCESSING_ERROR
         end
       end # InstanceMethods
     end # ProcessHelper

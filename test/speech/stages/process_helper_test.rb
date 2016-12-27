@@ -132,19 +132,19 @@ class Speech::Stages::ProcessHelperTest < Test::Unit::TestCase
 
   def test_should_processing?
     assert_equal false, @entity.processing?
-    @entity.status = Speech::STATUS_PROCESSING
+    @entity.status = Speech::State::STATUS_PROCESSING
     assert_equal true, @entity.processing?
   end
 
   def test_should_processed?
     assert_equal false, @entity.processed?
-    @entity.status = Speech::STATUS_PROCESSED
+    @entity.status = Speech::State::STATUS_PROCESSED
     assert_equal true, @entity.processed?
   end
 
   def test_should_processing_error?
     assert_equal false, @entity.processing_error?
-    @entity.status = Speech::STATUS_PROCESSING_ERROR
+    @entity.status = Speech::State::STATUS_PROCESSING_ERROR
     assert_equal true, @entity.processing_error?
   end
 end
