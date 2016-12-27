@@ -65,6 +65,6 @@ module Speech
       def status
         bits
       end
-    end # Processed
+    end # ProcessedStages
   end # Stages
 end # Speech
