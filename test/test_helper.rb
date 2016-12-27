@@ -1,8 +1,9 @@
 require 'rubygems'
 require 'test/unit'
 require 'test/unit/assertions'
-require 'speech/stages'
+require 'speech_stages'
 require 'mocha/test_unit'
+require "byebug"
 
 class Test::Unit::TestCase
 

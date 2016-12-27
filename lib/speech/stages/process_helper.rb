@@ -49,18 +49,18 @@ module Speech
         end
 
         def processing?
-          raise CPW::Speech::NotImplementedError, "status not present" unless respond_to?(:status)
-          status == CPW::Speech::STATUS_PROCESSING
+          raise NotImplementedError, "status not present" unless respond_to?(:status)
+          status == Speech::STATUS_PROCESSING
         end
 
         def processed?
-          raise CPW::Speech::NotImplementedError, "status not present" unless respond_to?(:status)
-          status == CPW::Speech::STATUS_PROCESSED
+          raise NotImplementedError, "status not present" unless respond_to?(:status)
+          status == Speech::STATUS_PROCESSED
         end
 
         def processing_error?
-          raise CPW::Speech::NotImplementedError, "status not present" unless respond_to?(:status)
-          status == CPW::Speech::STATUS_PROCESSING_ERROR
+          raise NotImplementedError, "status not present" unless respond_to?(:status)
+          status == Speech::STATUS_PROCESSING_ERROR
         end
       end # InstanceMethods
     end # ProcessHelper
