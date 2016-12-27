@@ -12,12 +12,12 @@ module Speech
           self.processed_stages_proxy = if processed_stages_proxy
             processed_stages_proxy.set(values)
           else
-            ProcessedStages.new(values)
+            ProcessedStages.new(self, values)
           end
         end
 
         def processed_stages
-          self.processed_stages_proxy ||= ProcessedStages.new
+          self.processed_stages_proxy ||= ProcessedStages.new(self)
         end
 
         def unprocessed?

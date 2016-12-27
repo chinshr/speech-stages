@@ -13,21 +13,34 @@ module Speech
       }
 
       attr_accessor :bits
+      attr_reader :target
 
-      def initialize(values = nil)
-        @bits = 0
+      def initialize(target, values = nil)
+        @target = target
+        if @target.respond_to?(:processed_stages_mask)
+          @bits = @target.send(:processed_stages_mask)
+        else
+          @bits = 0
+        end
         set(values) if values
       end
 
-      def self.bit_of(number)
-        numbers = PROCESSED_STAGES.map {|k,v| number.is_a?(Fixnum) ? v : k}
-        index   = numbers.index(number.is_a?(Fixnum) ? number : number.to_sym)
-        index ? 2**index : 0
-      end
+      class << self
+
+        def bit_of(number)
+          numbers = PROCESSED_STAGES.map {|k,v| number.is_a?(Fixnum) ? v : k}
+          index   = numbers.index(number.is_a?(Fixnum) ? number : number.to_sym)
+          index ? 2**index : 0
+        end
+
+      end # class
 
       def set(values)
         new_keys  = ([values].flatten.map(&:to_sym) & PROCESSED_STAGES.keys)
         self.bits = new_keys.sum {|d| self.class.bit_of(d)}
+        if @target.respond_to?(:processed_stages_mask=)
+          @target.send(:processed_stages_mask=, self.bits)
+        end
         self
       end
 
@@ -50,7 +63,7 @@ module Speech
         if other_object.is_a?(self.class)
           get == other_object.get
         else
-          get == ProcessedStages.new(other_object).get
+          get == ProcessedStages.new(self, other_object).get
         end
       end
 
@@ -65,6 +78,7 @@ module Speech
       def status
         bits
       end
+
     end # ProcessedStages
   end # Stages
 end # Speech
