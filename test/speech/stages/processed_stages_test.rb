@@ -13,8 +13,28 @@ class Speech::Stages::ProcessedStagesTest < Test::Unit::TestCase
   end
 
   def setup
+    @klass  = Speech::Stages::ProcessedStages
     @target = TargetWithoutStatus.new
-    @stages = Speech::Stages::ProcessedStages.new(@target)
+    @stages = @klass.new(@target)
+  end
+
+  def test_bit_of
+    assert_equal 2**0, @klass.bit_of(:build)
+    assert_equal 2**1, @klass.bit_of(:encode)
+    assert_equal 2**2, @klass.bit_of(:convert)
+    assert_equal 2**3, @klass.bit_of(:extract)
+    assert_equal 2**4, @klass.bit_of(:split)
+    assert_equal 2**5, @klass.bit_of(:perform)
+  end
+
+  def test_bits
+    assert_equal @klass.bit_of(:build), @klass.bits(:build)
+    assert_equal @klass.bit_of(:build) + @klass.bit_of(:encode),
+      @klass.bits([:build, :encode])
+    assert_equal @klass.bit_of(:build) + @klass.bit_of(:encode) + @klass.bit_of(:convert),
+      @klass.bits([:build, :encode, :convert])
+    assert_equal @klass.bit_of(:build) + @klass.bit_of(:encode) + @klass.bit_of(:convert) + @klass.bit_of(:extract),
+      @klass.bits([:build, :encode, :convert, :extract])
   end
 
   def test_initialize_target

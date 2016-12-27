@@ -27,10 +27,15 @@ module Speech
 
       class << self
 
-        def bit_of(number)
-          numbers = PROCESSED_STAGES.map {|k,v| number.is_a?(Fixnum) ? v : k}
-          index   = numbers.index(number.is_a?(Fixnum) ? number : number.to_sym)
+        def bit_of(number_or_value)
+          numbers = PROCESSED_STAGES.map {|k,v| number_or_value.is_a?(Fixnum) ? v : k}
+          index   = numbers.index(number_or_value.is_a?(Fixnum) ? number_or_value : number_or_value.to_sym)
           index ? 2**index : 0
+        end
+
+        def bits(values)
+          new_keys = ([values].flatten.map(&:to_sym) & PROCESSED_STAGES.keys)
+          new_keys.sum {|d| bit_of(d)}
         end
 
       end # class
