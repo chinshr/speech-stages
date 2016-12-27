@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Speech::Stages::VERSION
   spec.authors       = ["Juergen Fesslmeier"]
   spec.email         = ["jfesslmeier@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Application specific common helper library to sync chunk processing stages.}
+  spec.description   = %q{Application specific common helper library to sync chunk processing stages.}
+  spec.homepage      = "https://github.com/vzo/speech-stages"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
