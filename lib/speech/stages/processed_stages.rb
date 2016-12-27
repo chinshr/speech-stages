@@ -52,6 +52,10 @@ module Speech
       def add(values)
         combined_keys = (([values].flatten.map(&:to_sym) & PROCESSED_STAGES.keys) | get)
         self.bits = combined_keys.sum {|d| self.class.bit_of(d)}
+        if @target.respond_to?(:processed_stages_mask=)
+          @target.send(:processed_stages_mask=, self.bits)
+        end
+        self
       end
       alias_method :push, :add
 

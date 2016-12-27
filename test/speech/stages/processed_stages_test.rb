@@ -97,6 +97,13 @@ class Speech::Stages::ProcessedStagesTest < Test::Unit::TestCase
     assert_equal target.processed_stages_mask, stages.bits
   end
 
+  def test_add_with_mask
+    target = TargetWithProcessedStagesMask.new
+    stages = Speech::Stages::ProcessedStages.new(target)
+    stages.add(:build)
+    assert_equal target.processed_stages_mask, stages.bits
+  end
+
   def test_initialize_from_target
     target = TargetWithProcessedStagesMask.new
     target.processed_stages_mask = 1
