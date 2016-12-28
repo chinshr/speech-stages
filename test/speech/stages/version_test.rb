@@ -3,7 +3,7 @@ require 'test_helper'
 class Speech::Stages::VersionTest < Test::Unit::TestCase
 
   def test_current_version
-    assert_equal "0.0.8", Speech::Stages::VERSION
+    assert_equal "0.0.9", Speech::Stages::VERSION
   end
 
 end

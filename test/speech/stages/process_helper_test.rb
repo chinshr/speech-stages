@@ -74,40 +74,40 @@ class Speech::Stages::ProcessHelperTest < Test::Unit::TestCase
     assert_equal Speech::Stages::ProcessedStages::PROCESSED_STAGES[:build], @entity.processed_stages.status
   end
 
-  def test_should_build
+  def test_should_be_build
     @entity.processed_stages << :build
     assert_equal [:build], @entity.processed_stages.to_a
-    assert_equal true, @entity.built?
+    assert_equal true, @entity.process_built?
   end
 
   def test_should_encode
     @entity.processed_stages << :encode
     assert_equal [:encode], @entity.processed_stages.to_a
-    assert_equal true, @entity.encoded?
+    assert_equal true, @entity.process_encoded?
   end
 
   def test_should_convert
     @entity.processed_stages << :convert
     assert_equal [:convert], @entity.processed_stages.to_a
-    assert_equal true, @entity.converted?
+    assert_equal true, @entity.process_converted?
   end
 
   def test_should_extract
     @entity.processed_stages << :extract
     assert_equal [:extract], @entity.processed_stages.to_a
-    assert_equal true, @entity.extracted?
+    assert_equal true, @entity.process_extracted?
   end
 
-  def test_should_split
+  def test_should_be_split
     @entity.processed_stages << :split
     assert_equal [:split], @entity.processed_stages.to_a
-    assert_equal true, @entity.split?
+    assert_equal true, @entity.process_split?
   end
 
   def test_should_perform
     @entity.processed_stages << :perform
     assert_equal [:perform], @entity.processed_stages.to_a
-    assert_equal true, @entity.performed?
+    assert_equal true, @entity.process_performed?
   end
 
   def test_should_clear

@@ -24,27 +24,27 @@ module Speech
           processed_stages.empty?
         end
 
-        def built?
+        def process_built?
           processed_stages.include?(:build)
         end
 
-        def encoded?
+        def process_encoded?
           processed_stages.include?(:encode)
         end
 
-        def converted?
+        def process_converted?
           processed_stages.include?(:convert)
         end
 
-        def extracted?
+        def process_extracted?
           processed_stages.include?(:extract)
         end
 
-        def split?
+        def process_split?
           processed_stages.include?(:split)
         end
 
-        def performed?
+        def process_performed?
           processed_stages.include?(:perform)
         end
 
