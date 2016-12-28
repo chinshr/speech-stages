@@ -24,41 +24,41 @@ module Speech
           processed_stages.empty?
         end
 
-        def process_built?
+        def stage_built?
           processed_stages.include?(:build)
         end
 
-        def process_encoded?
+        def stage_encoded?
           processed_stages.include?(:encode)
         end
 
-        def process_converted?
+        def stage_converted?
           processed_stages.include?(:convert)
         end
 
-        def process_extracted?
+        def stage_extracted?
           processed_stages.include?(:extract)
         end
 
-        def process_split?
+        def stage_split?
           processed_stages.include?(:split)
         end
 
-        def process_performed?
+        def stage_performed?
           processed_stages.include?(:perform)
         end
 
-        def processing?
+        def state_processing?
           raise NotImplementedError, "status not present" unless respond_to?(:status)
           status == Speech::State::STATUS_PROCESSING
         end
 
-        def processed?
+        def state_processed?
           raise NotImplementedError, "status not present" unless respond_to?(:status)
           status == Speech::State::STATUS_PROCESSED
         end
 
-        def processing_error?
+        def state_processing_error?
           raise NotImplementedError, "status not present" unless respond_to?(:status)
           status == Speech::State::STATUS_PROCESSING_ERROR
         end

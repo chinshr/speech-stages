@@ -74,40 +74,44 @@ class Speech::Stages::ProcessHelperTest < Test::Unit::TestCase
     assert_equal Speech::Stages::ProcessedStages::PROCESSED_STAGES[:build], @entity.processed_stages.status
   end
 
-  def test_should_be_build
+  def test_should_be_unprocessed
+    assert_equal true, @entity.unprocessed?
+  end
+
+  def test_should_be_built
     @entity.processed_stages << :build
     assert_equal [:build], @entity.processed_stages.to_a
-    assert_equal true, @entity.process_built?
+    assert_equal true, @entity.stage_built?
   end
 
-  def test_should_encode
+  def test_should_be_encoded
     @entity.processed_stages << :encode
     assert_equal [:encode], @entity.processed_stages.to_a
-    assert_equal true, @entity.process_encoded?
+    assert_equal true, @entity.stage_encoded?
   end
 
-  def test_should_convert
+  def test_should_be_converted
     @entity.processed_stages << :convert
     assert_equal [:convert], @entity.processed_stages.to_a
-    assert_equal true, @entity.process_converted?
+    assert_equal true, @entity.stage_converted?
   end
 
-  def test_should_extract
+  def test_should_be_extracted
     @entity.processed_stages << :extract
     assert_equal [:extract], @entity.processed_stages.to_a
-    assert_equal true, @entity.process_extracted?
+    assert_equal true, @entity.stage_extracted?
   end
 
   def test_should_be_split
     @entity.processed_stages << :split
     assert_equal [:split], @entity.processed_stages.to_a
-    assert_equal true, @entity.process_split?
+    assert_equal true, @entity.stage_split?
   end
 
-  def test_should_perform
+  def test_should_be_performed
     @entity.processed_stages << :perform
     assert_equal [:perform], @entity.processed_stages.to_a
-    assert_equal true, @entity.process_performed?
+    assert_equal true, @entity.stage_performed?
   end
 
   def test_should_clear
@@ -120,32 +124,32 @@ class Speech::Stages::ProcessHelperTest < Test::Unit::TestCase
   def test_should_raise_not_implemented_status
     entity_without_status = ChunksterWithoutStatus.new
     assert_raise Speech::Stages::NotImplementedError do
-      entity_without_status.processing?
+      entity_without_status.state_processing?
     end
     assert_raise Speech::Stages::NotImplementedError do
-      entity_without_status.processed?
+      entity_without_status.state_processed?
     end
     assert_raise Speech::Stages::NotImplementedError do
-      entity_without_status.processing_error?
+      entity_without_status.state_processing_error?
     end
   end
 
-  def test_should_processing?
-    assert_equal false, @entity.processing?
+  def test_should_be_processing
+    assert_equal false, @entity.state_processing?
     @entity.status = Speech::State::STATUS_PROCESSING
-    assert_equal true, @entity.processing?
+    assert_equal true, @entity.state_processing?
   end
 
-  def test_should_processed?
-    assert_equal false, @entity.processed?
+  def test_should_be_processed
+    assert_equal false, @entity.state_processed?
     @entity.status = Speech::State::STATUS_PROCESSED
-    assert_equal true, @entity.processed?
+    assert_equal true, @entity.state_processed?
   end
 
-  def test_should_processing_error?
-    assert_equal false, @entity.processing_error?
+  def test_should_be_processing_error
+    assert_equal false, @entity.state_processing_error?
     @entity.status = Speech::State::STATUS_PROCESSING_ERROR
-    assert_equal true, @entity.processing_error?
+    assert_equal true, @entity.state_processing_error?
   end
 
   def test_set_from_other_instance
@@ -154,5 +158,4 @@ class Speech::Stages::ProcessHelperTest < Test::Unit::TestCase
     other_entity.processed_stages = @entity.processed_stages
     assert_equal [:build, :encode], other_entity.processed_stages.to_a
   end
-
 end
